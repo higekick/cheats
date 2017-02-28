@@ -1,0 +1,38 @@
+Ctr + F12
+ メソッド一覧
+
+Shift + F10
+ 起動
+
+Shift + F09
+ デバッグ起動
+
+Alt + F7
+ Find Usage
+
+Ctr + Alt + H
+ Call Hierarchy
+
+Esc
+ エディタにフォーカス
+
+F12
+ エディタからツールバーにフォーカス
+
+Alt + F1
+ 開いているソースからプロジェクトで選択状態にする。
+
+Ctl + Alt + O
+ 不要なインポートを削除
+ 
+Crl + Alt + L
+ コードの整形
+
+■デバッグ
+ Resume F9
+
+ Step Over F8
+ Step Into F7
+ 
+ ブレークポイント一覧
+ ctrl+shift+F8
