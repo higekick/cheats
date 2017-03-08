@@ -1,0 +1,3 @@
+・ログ監視
+$ tail -f application.log
+
