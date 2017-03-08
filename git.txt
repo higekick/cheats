@@ -1,0 +1,11 @@
+リモートリポジトリをチェックアウト
+
+
+いらなくなったブランチを削除
+$ git branch -D foo
+
+リモートの一覧
+$ git branch --remote
+
+ローカルのリポジトリ名を変更
+git branch -m hoge foo
