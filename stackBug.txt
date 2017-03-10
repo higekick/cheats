@@ -5,3 +5,45 @@
 ・解決したら忘れずにどうやって解決できたかを書いておく。
   -インストールしなおした。自分の担当箇所とは違うところのバグ
   -インストールしなおすと、初期設定値(自動に割り振られるものが変わったため)
+
+・gradleの記述
+モジュールのプロジェクト
+sdk_hogeのgradleに以下のように記述していた
+
+sdk_hoge直下にhoge-debug.aarがある
+
+configurations.maybeCreate("default")
+artifacts.add("default", file('dprofiler-debug.aar'))
+
+
+リリースビルドでhoge-release.aarを参照したことになった。
+
+このプロジェクトのgradleに以下のようにかいてもだめだった
+
+    debugCompile(name:'hoge-debug', ext:'aar')
+    releaseCompile(name:'hoge-release', ext:'aar')
+
+appのgradleに以下のように書いたらいけた
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
+    }
+}
+
+dependencies {
+    debugCompile(name:'hoge-debug', ext:'aar')
+    releaseCompile(name:'hoge-release', ext:'aar')
+}
+
+・aarファイルのビルド
+  BuildからRebuild Projectとやっていたらうまくaarができていなかった。
+  debug/releaseのそれぞれのaarをちゃんと作るには右のGradleのタブから
+  対象プロジェクト->Tasks->build->assembleもしくは、assembleDebug、assembleReleaseとやる。
+　対象プロジェクトの\build\outputs\aarの下にそれぞれできている。
+
+・よくわからず動かして設定を変えて動かなくなったら差分を見る
+
+・想定してとりかかった方法で糸口がつかめないなら、そもそもその想定が間違い。
+　そんなはずはないという固定した思考から他の方法を模索すること。

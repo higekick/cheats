@@ -1,11 +1,34 @@
+■commit
+直前のcommitコメントを変更する
+$ git commit --amend
+
 リモートリポジトリをチェックアウト
 
+いらなくなったブランチを削除(ローカル)
+$ git branch -d foo
 
-いらなくなったブランチを削除
-$ git branch -D foo
+リモートを削除(削除したローカルをpushする)
 
 リモートの一覧
 $ git branch --remote
 
 ローカルのリポジトリ名を変更
-git branch -m hoge foo
+$git branch -m hoge foo
+
+■スタッシュ
+スタッシュ一覧
+$ git stash list
+
+スタッシュの中身表示 一覧から表示されたスタッシュ名を指定
+$ git stash show stash@{0}
+
+スタッシュを適用
+$ git checkout stash@{0}
+
+スタッシュをファイル単位で適用
+$ git checkout stash@{0} fuaga.java
+
+スタッシュを削除
+git stash drop stash@{N} # N番目のスタッシュを削除
+
+
