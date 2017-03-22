@@ -31,4 +31,9 @@ $ git checkout stash@{0} fuaga.java
 スタッシュを削除
 git stash drop stash@{N} # N番目のスタッシュを削除
 
+■リベース
 
+リベース後、リモートにプッシュ
+$ git push --force origin step3_dialog_ad :step3_dialog_ad
+
+■マージ
