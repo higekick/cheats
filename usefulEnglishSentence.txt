@@ -1,0 +1,18 @@
+
+I replied to Apple App Review,
+Asking for their guidance on what is needed to be changed or added.
+
+うまく動作した時
+it worked out smoothly without of crashes.
+
+テストをお願いした時
+Let me know if you find any problems with it.
+
+修正してブランチにコミットした時
+○○ has developed fixes for the reported issues, changes have been committed to hoge branch.
+
+不具合内容を伝えたい時(アイテムがタスクに追加できない。)
+Items couldn't be added for Tasks.
+
+Regardingを使う時の例 aboutを使いがちだが、regardingの方が丁寧なのかな。
+If you have any questions or comments regarding this email, please contact us at https://aws.amazon.com/support

@@ -2,22 +2,41 @@
 直前のcommitコメントを変更する
 $ git commit --amend
 
+commitをまとめる
+$ git rebase -i HEAD~~~
+
+リモートのコミットを取り消したい場合
+
+http://tmtms.hatenablog.com/entry/20101221/git
+
+■ブランチ
+ブランチを作成してチェックアウト
+$ git checkout -b hoge
+
 リモートリポジトリをチェックアウト
+$ git checkout hoge
 
 いらなくなったブランチを削除(ローカル)
 $ git branch -d foo
 
-リモートを削除(削除したローカルをpushする)
+リモートのブランチを削除(削除したローカルをpushする)
+$ git push origin :test
 
 リモートの一覧
 $ git branch --remote
 
-ローカルのリポジトリ名を変更
+ローカルブランチ名を変更
 $git branch -m hoge foo
+
+■push
+$ git push origin hoge
 
 ■スタッシュ
 スタッシュ一覧
 $ git stash list
+
+名前を付けてstash
+$git stash save [message]
 
 スタッシュの中身表示 一覧から表示されたスタッシュ名を指定
 $ git stash show stash@{0}
@@ -31,9 +50,25 @@ $ git checkout stash@{0} fuaga.java
 スタッシュを削除
 git stash drop stash@{N} # N番目のスタッシュを削除
 
+一部だけstashしたい場合
+# A.txt, B.txt, C.txtのうち、B.txtだけstashしたいという場合
+
+# (1) stashしたいファイル以外をコミット(ローカルだけ)
+git add A.txt
+git add C.txt
+git commit -m '一時コミット(resetする)'
+
+# (2) stashしたいファイルだけが残った状態でgit stash
+git stash
+
+# (3) 直前のコミットを取り消す
+git reset HEAD~
+
 ■リベース
 
 リベース後、リモートにプッシュ
 $ git push --force origin step3_dialog_ad :step3_dialog_ad
 
 ■マージ
+マージ checkout master後、masterにhogeをマージ
+$ git merge hoge

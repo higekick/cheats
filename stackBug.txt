@@ -1,4 +1,5 @@
 ・ログを仕込む
+　デバッグ実行では止まりまくってうまく追えない場合はログを出力する。
 
 ・休憩する
 
@@ -6,51 +7,28 @@
   -インストールしなおした。自分の担当箇所とは違うところのバグ
   -インストールしなおすと、初期設定値(自動に割り振られるものが変わったため)
 
-・gradleの記述
-モジュールのプロジェクト
-sdk_hogeのgradleに以下のように記述していた
-
-sdk_hoge直下にhoge-debug.aarがある
-
-configurations.maybeCreate("default")
-artifacts.add("default", file('dprofiler-debug.aar'))
-
-
-リリースビルドでhoge-release.aarを参照したことになった。
-
-このプロジェクトのgradleに以下のようにかいてもだめだった
-
-    debugCompile(name:'hoge-debug', ext:'aar')
-    releaseCompile(name:'hoge-release', ext:'aar')
-
-appのgradleに以下のように書いたらいけた
-
-repositories {
-    mavenCentral()
-    flatDir {
-        dirs 'libs' //this way we can find the .aar file in libs folder
-    }
-}
-
-dependencies {
-    debugCompile(name:'hoge-debug', ext:'aar')
-    releaseCompile(name:'hoge-release', ext:'aar')
-}
-
-・aarファイルのビルド
-  BuildからRebuild Projectとやっていたらうまくaarができていなかった。
-  debug/releaseのそれぞれのaarをちゃんと作るには右のGradleのタブから
-  対象プロジェクト->Tasks->build->assembleもしくは、assembleDebug、assembleReleaseとやる。
-　対象プロジェクトの\build\outputs\aarの下にそれぞれできている。
-
-・よくわからず動かして設定を変えて動かなくなったら差分を見る
+・よくわからず動かして設定を変えて動かなくなったらソースレベルで差分を見る。
+　GitやSourceTreeから見てもいいけど、IDEの差分表示が見やすい。
+　Android StudioならAlt + 9で差分のあるファイル一覧が表示されるので
+　右クリックからShow Diffとやると画面からいじったgradleなどの設定ファイルも
+　差分表示されるので意図せず変更したファイルの変更がわかって解決につながる。
 
 ・想定してとりかかった方法で糸口がつかめないなら、そもそもその想定が間違い。
 　そんなはずはないという固定した思考から他の方法を模索すること。
 
 ・わかる人に聞く。(手遅れになる前に)
+　特に評価者の人などアプリやシステムをよく使っている人に聞くとOK
+　聞くことによってその人の思考も整理され、二人とも気づいていなかったことに気付ける。
 
-・簡単な方法でも良いが運用的に確認する。
+・簡単な方法でも良いか運用的に確認する。
+  想定していた方法でどうしてもできない場合は妥協も必要
 
 ・なにか足りてない
 　ローカルDBにダンプとか
+
+・デバッグしていてストップしないと思ったら、実行しているモジュールと
+　デバッグ中のソースが違う。特にattach to debugger process to android processで途中から
+　デバッガーをアタッチした場合はソースを修正しているものを起動中のアプリでデバッグしている
+　ことになりかねない。
+　⇒ビルドしなおすこと
+

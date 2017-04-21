@@ -36,3 +36,21 @@ Crl + Alt + L
  
  ブレークポイント一覧
  ctrl+shift+F8
+
+ Ctr + w
+  でカーソルのある変数選択
+
+ Alt + F8
+  ⇒evaluate expression
+
+■build
+Android Studio横のbuildタブ
+:appや各モジュール
+ tasks
+  build
+   assembleDebug
+   assembleRelease
+
+■adbcommand
+インストール済みパッケージ一覧
+$adb shell pm list package
