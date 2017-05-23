@@ -31,6 +31,9 @@ $git branch -m hoge foo
 ■push
 $ git push origin hoge
 
+ローカルでリモートを上書き(rebaseしてコミットをまとめた後、リモートにもそのまま反映させたい場合)
+$ git push -f origin hoge
+
 ■スタッシュ
 スタッシュ一覧
 $ git stash list
@@ -72,3 +75,13 @@ $ git push --force origin step3_dialog_ad :step3_dialog_ad
 ■マージ
 マージ checkout master後、masterにhogeをマージ
 $ git merge hoge
+
+■tag
+タグをつける
+$ git tag hoge-1.8.64
+
+タグのpush
+$ git push --tags
+
+リモートのタグ一覧
+$ git ls-remote --tags

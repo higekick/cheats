@@ -24,7 +24,7 @@ Alt + F1
 
 Ctl + Alt + O
  不要なインポートを削除
- 
+
 Crl + Alt + L
  コードの整形
 
@@ -33,7 +33,7 @@ Crl + Alt + L
 
  Step Over F8
  Step Into F7
- 
+
  ブレークポイント一覧
  ctrl+shift+F8
 
@@ -52,5 +52,38 @@ Android Studio横のbuildタブ
    assembleRelease
 
 ■adbcommand
-インストール済みパッケージ一覧
+・インストール済みパッケージ一覧
 $adb shell pm list package
+
+・apkのインストール(エミュレータなどに)
+※USBで接続している端末、立ち上げているエミュレータは1台のみとしないとエラーとなる。
+$adb install hogehoge.apk
+
+・アプリの吐くログファイルなどをPCに持ってきたい時
+adb -d shell "run-as jp.co.johospace.jorte cat /data/data/jp.co.johospace.jorte/files/log.text" > log.text
+
+■Android Monitor
+
+・logcatで特定文字を省く
+例) "Bluetooth"を省きたい場合
+
+^(?!.*Bluetooth).+$
+
+・logcatに表示されるログをファイルに表示する
+以下サイトを参考にしてまんまでできた。
+http://dev-memo.net/2016/06/29/logcat%E3%81%AE%E3%83%AD%E3%82%B0%E3%82%92%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B/#comment-40
+
+■trace(プロファイラーを使った速度調査)
+
+怪しそうな個所（大きな範囲）で、
+android.os.Debug.startMethodTracing("ファイル名", バッファサイズ)
+とすると、トレースファイルが吐き出されます。
+トレースを止めるときには
+android.os.Debug.stopMethodTracing()
+
+PC の ターミナルで、
+adb pull 端末のファイル名 保存するファイル名
+とすることで、トレースファイルをコピーできます。
+コピーしてきファイルを参照するには、
+SDKROOT/tools/traceview トレースファイル
+とするとGUIで確認できます。
