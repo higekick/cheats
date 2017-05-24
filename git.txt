@@ -100,3 +100,9 @@ $ git push origin :TAGNAME
 
 ■git flow
 SourceTreeからリリース作業(masterにタグ付けを行う作業)
+
+1. 右上のGit Flowを押下し、「新規リリースを開始」
+ リリース名にタグと同じ名前を記載する
+  developと同じ位置にrelease/リリース名のブランチができる
+  
+2. 右上のGit Flowを押下し、「リリースを完了」
