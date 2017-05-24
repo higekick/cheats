@@ -80,8 +80,23 @@ $ git merge hoge
 タグをつける
 $ git tag hoge-1.8.64
 
+コメント付きタグ
+$ git tag -a hoge-1.8.65
+
 タグのpush
 $ git push --tags
 
+ローカルのタグ一覧
+$ git tag -n
+
 リモートのタグ一覧
 $ git ls-remote --tags
+
+タグを消す(ローカル)
+$ git tag -d TAGNAME
+
+タグを消す(リモート)
+$ git push origin :TAGNAME
+
+■git flow
+SourceTreeからリリース作業(masterにタグ付けを行う作業)
