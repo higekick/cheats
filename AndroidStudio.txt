@@ -10,6 +10,9 @@ Shift + F09
 Alt + F7
  Find Usage
 
+Alt + F12
+ Consoleを開く
+
 Ctr + Alt + H
  Call Hierarchy
 
@@ -28,14 +31,28 @@ Ctl + Alt + O
 Crl + Alt + L
  コードの整形
 
+■bookmark
+F11
+ ブックマークをつける
+
+Shift + F11
+ ブックマーク一覧
+
 ■デバッグ
+ デバッグ実行
+ Shift + F9
+
  Resume F9
 
  Step Over F8
  Step Into F7
 
+ ブレークポイント切り替え
+ 止めたい行で Ctr + F8
+
+
  ブレークポイント一覧
- ctrl+shift+F8
+ ctrl + shift + F8
 
  Ctr + w
   でカーソルのある変数選択
@@ -54,6 +71,9 @@ Android Studio横のbuildタブ
 ■adbcommand
 ・インストール済みパッケージ一覧
 $adb shell pm list package
+
+・アプリのDBなどの情報を端末に持ってきたい時
+$adb pull /mnt/sdcard/jp.co.johospace.jorte
 
 ・apkのインストール(エミュレータなどに)
 ※USBで接続している端末、立ち上げているエミュレータは1台のみとしないとエラーとなる。
