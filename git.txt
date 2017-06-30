@@ -1,3 +1,12 @@
+■add
+git add -i
+対話的にステージングするファイルを選べる。
+
+以下にステージングしたい場合はu, 終了したい場合はqなどコマンドを打ち込む
+What now>
+uの後、ファイルの番号を打ち込む
+ステージングされたものには*がつく。
+
 ■commit
 直前のcommitコメントを変更する
 $ git commit --amend
@@ -8,6 +17,9 @@ $ git rebase -i HEAD~~~
 リモートのコミットを取り消したい場合
 
 http://tmtms.hatenablog.com/entry/20101221/git
+
+■cherry-pick
+ git cherry-pick [リビジョン番号]
 
 ■ブランチ
 ブランチを作成してチェックアウト
@@ -72,6 +84,9 @@ git reset HEAD~
 リベース後、リモートにプッシュ
 $ git push --force origin step3_dialog_ad :step3_dialog_ad
 
+リベースを元に戻す
+$ git reset --hard ORIG_HEAD
+
 ■マージ
 マージ checkout master後、masterにhogeをマージ
 $ git merge hoge
@@ -98,11 +113,43 @@ $ git tag -d TAGNAME
 タグを消す(リモート)
 $ git push origin :TAGNAME
 
-■git flow
+■Git Flow
 SourceTreeからリリース作業(masterにタグ付けを行う作業)
 
 1. 右上のGit Flowを押下し、「新規リリースを開始」
  リリース名にタグと同じ名前を記載する
-  developと同じ位置にrelease/リリース名のブランチができる
-  
+  > developと同じ位置にrelease/リリース名のブランチができる
+
 2. 右上のGit Flowを押下し、「リリースを完了」
+　「次のメッセージでタグ」にタグにつけたいメッセージを記載
+　  > releaseブランチは削除され、masterにマージされて完了
+   tagのコメントの修正が必要な場合
+ （SourceTreeのGitGlowだとなぜかコメントが一行しかつけなれなそうなので以下で一旦消してvimでやりながらの方がいいかも）
+   $ git tag -d <タグ名> // 一回消して
+   $ git tag -a <タグ名> master // エディタが表示されメッセージを付けられる
+
+3. masterとtagをリモートにpushしておしまい
+  $ git push origin master
+  $ git push origin tagname
+
+■msys2にgit flowをインストール
+$ pacman -S git-flow
+
+■diff
+タグ間の差分でjavaファイルだけ見たい時
+$ git diff jorte-1.8.65 jorte-1.8.66 --diff-filter= *.java
+
+名前だけ見たい時は--name-onlyをつける
+$ git diff jorte-1.8.65 jorte-1.8.66 --name-only --diff-filter= *.java
+
+差分の中から搾りたい場合は-S"keyword"をつける
+$ git diff jorte-1.8.65 jorte-1.8.66 -S"draw" --name-only --diff-filter= *.java
+
+直前のcommitの差分を見る。
+$ git diff HEAD~..HEAD
+
+stageしたファイルの差分
+$ git diff --cached
+
+リモートとの差分
+$ git diff origin/develop..HEAD

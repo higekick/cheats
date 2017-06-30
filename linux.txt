@@ -1,3 +1,14 @@
 ・ログ監視
 $ tail -f /var/www/fuel/app/logs/application.log
 
+・linuxバージョン確認
+- CentOS, RedHat系
+$ cat /etc/redhat-release
+
+・カーネルバージョン確認
+$ uname -r
+
+・ディスク容量確認
+$ df
+MバイトやGバイト単位で表示させたい時は
+$ df -h
