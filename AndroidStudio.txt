@@ -74,6 +74,8 @@ $adb shell pm list package
 
 ・アプリのDBなどの情報を端末に持ってきたい時
 $adb pull /mnt/sdcard/jp.co.johospace.jorte
+$adb pull /mnt/sdcard/jorte2
+$adb pull /mnt/sdcard/jorte
 
 ・apkのインストール(エミュレータなどに)
 ※USBで接続している端末、立ち上げているエミュレータは1台のみとしないとエラーとなる。

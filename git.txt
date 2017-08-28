@@ -34,6 +34,9 @@ $ git branch -d foo
 リモートのブランチを削除(削除したローカルをpushする)
 $ git push origin :test
 
+削除したリモートブランチを復活させる。(誤って削除した場合などに)
+$ git branch {救済したいbranch名} {コミットのハッシュ}
+
 リモートの一覧
 $ git branch --remote
 
@@ -57,10 +60,10 @@ $git stash save [message]
 $ git stash show stash@{0}
 
 スタッシュを適用
-$ git checkout stash@{0}
+$ git stash apply stash@{0}
 
 スタッシュをファイル単位で適用
-$ git checkout stash@{0} fuaga.java
+$ git stash apply stash@{0} fuaga.java
 
 スタッシュを削除
 git stash drop stash@{N} # N番目のスタッシュを削除
@@ -91,7 +94,39 @@ $ git reset --hard ORIG_HEAD
 マージ checkout master後、masterにhogeをマージ
 $ git merge hoge
 
-■tag
+- マージを取り消す(revertする)
+
+branchAをdevelopへマージしたコミットをrevertしたい。
+
+まずマージしたSHAを確認する。
+$ git log --graph
+* commit 882d0019687e296d6521739e1d652e78015f4bbf
+| Author: ikegami <ikegami@aaaa.com>
+| Date:   Thu Jun 29 09:47:21 2017 +0900
+|
+|     branchB
+|     - 何かしらcommit
+|
+*   commit 52a3556952c543470f6fad0e83556664ac13b573
+|\  Merge: e4c312046 8debc1da1
+| | Author: ikegami <ikegami@aaaa.com>
+| | Date:   Wed Jun 28 18:44:59 2017 +0900
+| |
+| |     Merge branch 'branchA' into develop
+| |     - SDKを上げた対応をマージ
+| |
+| * commit 8debc1da1b12d0dc79bd2db06f9056b1b4cbd40e
+| | Author: ikegami <ikegami@aaaa.com>
+| | Date:   Wed Jun 28 15:25:22 2017 +0900
+| |
+| |     - アイコン表示を調整
+
+52a355695が取り消したいマージコミットである。
+Merge: の欄のe4c312046と8debc1da1が親コミットでdevelop側のe4c312046を残したい。
+親commitの左側(1を指定する。)
+その場合は
+$ git revert -m 1 52a355695
+
 タグをつける
 $ git tag hoge-1.8.64
 
@@ -130,7 +165,7 @@ SourceTreeからリリース作業(masterにタグ付けを行う作業)
 
 3. masterとtagをリモートにpushしておしまい
   $ git push origin master
-  $ git push origin tagname
+  $ git push origin <tagname>
 
 ■msys2にgit flowをインストール
 $ pacman -S git-flow
@@ -145,7 +180,7 @@ $ git diff jorte-1.8.65 jorte-1.8.66 --name-only --diff-filter= *.java
 差分の中から搾りたい場合は-S"keyword"をつける
 $ git diff jorte-1.8.65 jorte-1.8.66 -S"draw" --name-only --diff-filter= *.java
 
-直前のcommitの差分を見る。
+直前のcommitの差分を見る。(最新commitとその一つ前)
 $ git diff HEAD~..HEAD
 
 stageしたファイルの差分
@@ -153,3 +188,18 @@ $ git diff --cached
 
 リモートとの差分
 $ git diff origin/develop..HEAD
+
+addした後に差分が見たい場合
+$ git diff --cached ファイル名
+
+addしたファイルをキャンセルしたい場合
+$ git reset HEAD ファイル名
+
+■元に戻す
+$ git checkout
+
+　ファイル単位で戻す
+$ git checkout コミット番号 ファイルパス
+
+ハンクごとに確認しながら戻せる
+$ git checkout -p
