@@ -16,6 +16,10 @@ Alt + F12
 Ctr + Alt + H
  Call Hierarchy
 
+Ctr + H
+ Type Hierarchy
+  Interfaceの実装を確認できる
+
 Esc
  エディタにフォーカス
 

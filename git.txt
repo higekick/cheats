@@ -203,3 +203,23 @@ $ git checkout コミット番号 ファイルパス
 
 ハンクごとに確認しながら戻せる
 $ git checkout -p
+
+■git rebase -i をしてcommitを整理したものを戻す
+
+以下で操作履歴を確認
+$ git reflog
+c727480d7 HEAD@{0}: rebase -i (finish): returning to refs/heads/JORREQ3-640-1
+c727480d7 HEAD@{1}: rebase -i (pick): JORREQ3-640
+3b59d5e6b HEAD@{2}: rebase -i (squash): JORREQ3-640
+2ccc68642 HEAD@{3}: rebase -i (start): checkout HEAD~3
+8edf21b26 HEAD@{4}: reset: moving to HEAD
+8edf21b26 HEAD@{5}: commit: JORREQ3-640
+
+戻りたいところまで、ここではrebaseの前だからHEAD@{4}
+$ git reset --hard HEAD@{4}
+
+戻った
+$ git log --pretty=oneline
+8edf21b26fe82e317c18713edc742fcaed5b8ecc JORREQ3-640 - DST初日の挙動を修正 (ジョルテカレンダーのみ) -- 月表示、週表示、日表示 -- 新規予定登録時の日付と時刻表示、日付タップ、スクロール時の移動
+9999d23d8ee1bb3170f99dc2ef7fd55ae629038f バーティカルも修正を試したver
+2ccc68642be8413832fe61af3c706fd248c6c340 JORREQ3-640 - Timeクラスの夏時間問題
